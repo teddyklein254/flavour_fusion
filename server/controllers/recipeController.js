@@ -12,8 +12,14 @@ exports.homepage = async(req, res) => {
 		const limitNumber = 5;
 		const categories = await category.find({}).limit(limitNumber);
 		const latest = await recipe.find({}).sort({_id: -1}).limit(limitNumber);
+		const thai = await recipe.find({ 'category': 'Thai'}).limit(limitNumber);
+		const italian = await recipe.find({ 'category': 'Italian'}).limit(limitNumber);
+		const mexican = await recipe.find({ 'category': 'Mexican' }).limit(limitNumber);
+		const american = await recipe.find({ 'category': 'American' }).limit(limitNumber);
+		const spanish = await recipe.find({ 'category': 'Spanish' }).limit(limitNumber);
+		const japanese = await recipe.find({ 'category': 'Japanese' }).limit(limitNumber);
 
-		const food = { latest };
+		const food = { latest, thai, italian, mexican, american, spanish, japanese };
 
 	res.render('index', { title: 'Flavour Fusion - home', categories, food });
 	} catch (error) {
