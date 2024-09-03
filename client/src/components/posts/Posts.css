@@ -9,7 +9,7 @@
 .post-card {
     display: flex;
     flex-direction: column;
-    width: 500px;
+    width: 100%;
     max-width: 600px; /* Adjusted max-width for cards */
     margin-bottom: 20px;
     border: 1px solid #ddd;
