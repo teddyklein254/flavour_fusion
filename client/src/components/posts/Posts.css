@@ -1,0 +1,77 @@
+/* Posts.css */
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.post-card {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    max-width: 600px; /* Adjusted max-width for cards */
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.post-image {
+    width: 100%; /* Full width of the card */
+    height: 200px;
+    object-fit: cover;
+}
+
+.post-content {
+    padding: 15px;
+}
+
+.post-title {
+    font-size: 1.5rem;
+    margin: 0 0 10px;
+}
+
+.post-description {
+    font-size: 1rem;
+    color: #666;
+    margin: 0 0 10px;
+    position: relative;
+}
+
+.read-more {
+    background: none;
+    border: none;
+    color: #53BCE6; /* Main theme color */
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.action-button {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    color: #53BCE6; /* Main theme color */
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.action-button:hover {
+    color: #3a9ac8; /* Darker shade for hover effect */
+}
+
+.action-icon {
+    margin-right: 8px;
+}
