@@ -89,9 +89,9 @@ exports.exploreCategories = async(req, res) => {
 
 
 
-// /**
-//  * Insert Dummy Recipe Data
-//  */
+// // /**
+// //  * Insert Dummy Recipe Data
+// //  */
 // async function insertDummyRecipeData() {
 //     try {
 //         // Check if any recipes already exist to avoid duplicates
@@ -107,7 +107,7 @@ exports.exploreCategories = async(req, res) => {
 //                         "1 level teaspoon cayenne pepper",
 //                         "1 level teaspoon hot smoked paprika"
 //                     ],
-//                     "category": "Thai", 
+//                     "category": "Italian", 
 //                     "image": "Green_pasta.png"
 //                 },
 //                 { 
@@ -123,6 +123,25 @@ exports.exploreCategories = async(req, res) => {
 //                     ],
 //                     "category": "American", 
 //                     "image": "Guacamole.jpg"
+//                 },
+// 				{ 
+//                     "name": "Pad Thai",
+//                     "description": "Crispy fried eggs, special tamarind & tofu sauce, peanut sprinkle.",
+//                     "email": "iyawangui@moringa.co.ke",
+//                     "ingredients": [
+//                         "150g rice noodles",
+//                         "sesame oil",
+//                         "20g unsalted peanuts",
+//                         "2 cloves of garlic",
+//                         "80g silken tofu",
+// 						"low-salt soy sauce",
+// 						"2 teaspoons tamarind paste",
+// 						"2 teaspoons sweet chilli sauce",
+// 						"2 limes"
+
+//                     ],
+//                     "category": "Thai", 
+//                     "image": "Pad-thai.jpg"
 //                 },
 //             ]);
 //             console.log('Dummy data inserted successfully');
