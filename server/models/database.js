@@ -13,5 +13,5 @@ db.once('open', function() {
 	});
 
 // MODELS 
-require('./category.js');
-require('./recipe.js');
+require('./Category.js');
+require('./Recipe.js');
