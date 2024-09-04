@@ -19,7 +19,7 @@ const recipeSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ['Thai', 'Mexican', 'American', 'Spanish', 'Italian', 'Japanese'],
+        enum: ['Thai', 'Mexican', 'American', 'Spanish', 'Italian', 'Japanese', 'Kenyan' ],
         required: 'This field is required'
     },
     image: {
