@@ -1,49 +1,63 @@
 require('../models/database');
 const category = require('../models/Category');
-const recipe = require('../models/Recipe');
+const Recipe = require('../models/Recipe'); // Renamed to Recipe
 
 /**
  * GET /
  * homepage
  */
+exports.homepage = async (req, res) => {
+    try {
+        const limitNumber = 5;
+        const categories = await category.find({}).limit(limitNumber);
+        const latest = await Recipe.find({}).sort({ _id: -1 }).limit(limitNumber);
+        const thai = await Recipe.find({ 'category': 'Thai' }).limit(limitNumber);
+        const italian = await Recipe.find({ 'category': 'Italian' }).limit(limitNumber);
+        const mexican = await Recipe.find({ 'category': 'Mexican' }).limit(limitNumber);
+        const american = await Recipe.find({ 'category': 'American' }).limit(limitNumber);
+        const spanish = await Recipe.find({ 'category': 'Spanish' }).limit(limitNumber);
+        const japanese = await Recipe.find({ 'category': 'Japanese' }).limit(limitNumber);
+        const kenyan = await Recipe.find({ 'category': 'Kenyan' }).limit(limitNumber);
 
-exports.homepage = async(req, res) => {
-	try {
-		const limitNumber = 5;
-		const categories = await category.find({}).limit(limitNumber);
-		const latest = await recipe.find({}).sort({_id: -1}).limit(limitNumber);
-		const thai = await recipe.find({ 'category': 'Thai'}).limit(limitNumber);
-		const italian = await recipe.find({ 'category': 'Italian'}).limit(limitNumber);
-		const mexican = await recipe.find({ 'category': 'Mexican' }).limit(limitNumber);
-		const american = await recipe.find({ 'category': 'American' }).limit(limitNumber);
-		const spanish = await recipe.find({ 'category': 'Spanish' }).limit(limitNumber);
-		const japanese = await recipe.find({ 'category': 'Japanese' }).limit(limitNumber);
+        const food = { latest, thai, italian, mexican, american, spanish, japanese, kenyan };
 
-		const food = { latest, thai, italian, mexican, american, spanish, japanese };
-
-	res.render('index', { title: 'Flavour Fusion - home', categories, food });
-	} catch (error) {
-		res.status(500).send({message: error.message || "error occured"});
-	}
-}
-
+        res.render('index', { title: 'Flavour Fusion - home', categories, food });
+    } catch (error) {
+        res.status(500).send({ message: error.message || "Error occurred" });
+    }
+};
 
 /**
  * GET /categories
  * Categories
  */
+exports.exploreCategories = async (req, res) => {
+    try {
+        const limitNumber = 20;
+        const categories = await category.find({}).limit(limitNumber);
 
-exports.exploreCategories = async(req, res) => {
-	try {
-		const limitNumber = 20;
-		const categories = await category.find({}).limit(limitNumber);
+        res.render('categories', { title: 'Flavour Fusion - categories', categories });
+    } catch (error) {
+        res.status(500).send({ message: error.message || "Error occurred" });
+    }
+};
 
-	res.render('categories', { title: 'Flavour Fusion - categories', categories });
-	} catch (error) {
-		res.status(500).send({message: error.message || "error occured"});
-	}
-}
-
+/**
+ * GET /recipe/:id
+ * Recipe
+ */
+exports.exploreRecipe = async (req, res) => {
+    try {
+        let recipeId = req.params.id; // Corrected from req.param.id to req.params.id
+        const foundRecipe = await Recipe.findById(recipeId); // Changed variable name to foundRecipe
+        if (!foundRecipe) {
+            return res.status(404).send({ message: 'Recipe not found' });
+        }
+        res.render('recipe', { title: 'Flavour Fusion - Recipe', recipe: foundRecipe });
+    } catch (error) {
+        res.status(500).send({ message: error.message || "Error occurred" });
+    }
+};
 
 
 
@@ -148,6 +162,29 @@ exports.exploreCategories = async(req, res) => {
 //                     ],
 //                     "category": "Thai", 
 //                     "image": "Pad-thai.jpg"
+//                 },
+// 					{ 
+//                     "name": "Beef stew and ugali",
+//                     "description": "A classic Kenyan beef stew accompanied with properly cooked Ugali is everyone’s favourite. This method is one that results in beautifully cooked tender meat, however, you may some times purchase meat that is hard and needs to be boiled before adding to the pot.",
+//                     "email": "shakur@pedi.co.ke",
+//                     "ingredients": [
+//                         	" 2 tbsp oil",
+// 							"1 onion, chopped",
+// 							"1 tbsp garlic, minced",
+// 							"1 tsp curry powder",
+// 							"500 gms beef cubes",
+// 							"1 beef stock cube",
+// 							"Salt to taste",
+// 							"Freshly ground black pepper",
+// 							"3 tomatoes, diced",
+// 							"4 cups water",
+// 							"Coriander leaves, chopped",
+// 							"For Ugali- 3 cups water",
+// 							"1 1/2 cups Unga wa Dola maize meal",
+
+//                     ],
+//                     "category": "Kenyan", 
+//                     "image": "ugali.jpg"
 //                 },
 //             ]);
 //             console.log('Dummy data inserted successfully');
