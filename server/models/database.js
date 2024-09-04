@@ -15,3 +15,4 @@ db.once('open', function() {
 // MODELS 
 require('./Category.js');
 require('./Recipe.js');
+require('./user.js');
