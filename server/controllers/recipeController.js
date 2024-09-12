@@ -109,7 +109,24 @@ exports.exploreLatest = async(req, res) => {
   } catch (error) {
     res.satus(500).send({message: error.message || "Error Occured" });
   }
-} 
+};
+
+/**
+ * GET /explore-random
+ * Explore Random 
+*/
+exports.exploreRandom = async (req, res) => {
+  try {
+    const limitNumber = 20;
+    const count = await Recipe.countDocuments();
+    const randomIndex = Math.floor(Math.random() * count);
+    const randomRecipe = await Recipe.findOne().skip(randomIndex);
+
+    res.render('explore-random', { title: 'Flavour Fusion - Explore Random', recipe: [randomRecipe] });
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Error occurred" });
+  }
+};
 
 
 
