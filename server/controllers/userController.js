@@ -12,37 +12,56 @@ const jwt = require('jsonwebtoken');
 
 exports.registerUser = async (req, res) => {
     try {
-        console.log(req.body); // Add this line to see the incoming request data
-        const { username, email, password } = req.body;
-        if (!username || !email || !password) {
-            return res.status(400).send({ message: 'All fields are required' });
-        }
-
-        const userNameExists = await User.findOne({ username });
-        if (userNameExists) {
-            return res.status(400).send({ message: 'Username already exists' });
-        }
-
-        const userExists = await User.findOne({ email });
-        if (userExists) {
-            return res.status(400).send({ message: 'User already exists' });
-        }
-
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
-        const newUser = new User({
-            username,
-            email,
-            password: hashedPassword
+      const { username, email, password } = req.body;
+  
+      // Check if all required fields are filled
+      if (!username || !email || !password) {
+        return res.status(400).render('register', { 
+          title: 'Flavour Fusion - Sign Up', 
+          error: 'All fields are required' 
         });
-
-        await newUser.save();
-        res.status(201).send({ message: 'User created successfully' });
+      }
+  
+      const userNameExists = await User.findOne({ username });
+      if (userNameExists) {
+        return res.status(400).render('register', { 
+          title: 'Flavour Fusion - Sign Up', 
+          error: 'Username already exists' 
+        });
+      }
+  
+      const userExists = await User.findOne({ email });
+      if (userExists) {
+        return res.status(400).render('register', { 
+          title: 'Flavour Fusion - Sign Up', 
+          error: 'Email already exists' 
+        });
+      }
+  
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+  
+      const newUser = new User({
+        username,
+        email,
+        password: hashedPassword
+      });
+  
+      await newUser.save();
+  
+      res.status(201).render('register', { 
+        title: 'Flavour Fusion - Sign Up', 
+        success: 'User registered successfully! Please log in.' 
+      });
+  
     } catch (error) {
-        res.status(500).send({ message: error.message || "error occurred" });
+      res.status(500).render('register', { 
+        title: 'Flavour Fusion - Sign Up', 
+        error: error.message || "An error occurred during registration" 
+      });
     }
-}
+  };
+  
 
 
 /**
