@@ -133,8 +133,56 @@ exports.exploreRandom = async (req, res) => {
  * Submit Recipe
 */
 exports.submitRecipe = async (req, res) => {
-    res.render('submit-recipe', { title: 'Flavour Fusion - Submit Recipe'});
+  const infoErrorObj = req.flash('infoErrors');
+  const successMessage = req.flash('successMessage');
+  const infoSubmitObj = req.flash('infoSubmit');
+    res.render('submit-recipe', { title: 'Flavour Fusion - Submit Recipe', infoErrorObj, infoSubmitObj, successMessage});
 };
+
+/**
+ * POST /submit-recipe
+ * Submit Recipe On Post
+*/
+exports.submitRecipeOnPost = async (req, res) => {
+
+  try {
+
+    const newRecipe = new Recipe({
+      name: 'Mixed beans and maize(Githeri)',
+      description: 'A delicious mixture of one of the best collaboration in Africa',
+      email: 'Jayden@jasan.mail',
+      ingredients: [
+        '1 cup of yellow beans',
+        '2 cups of maize corns',
+        '3 cups of water'],
+      category: 'Kenyan',
+      image: 'Githeri.jpeg'
+    });
+
+    await newRecipe.save();
+
+
+
+
+
+
+
+
+
+      req.flash('infoSubmit', 'Recipe successfully submited');
+      res.redirect('/submit-recipe');
+  } catch (error) {
+    req.flash('infoErrors', 'Recipe successfully submited');
+    res.redirect('/submit-recipe');   
+  }
+
+
+
+
+
+
+};
+
 
 
 	

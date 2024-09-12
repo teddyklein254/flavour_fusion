@@ -5,28 +5,41 @@
 	</div>
 </div>
 
+<% if(infoSubmitObj != '') { %>
+<div class="col-8 alert alert-success" role="alert">
+	<%= infoSubmitObj %>
+</div>
+<% } %>
+
+<% if(infoErrorObj != '') { %>
+<div class="col-8 alert alert-danger" role="alert">
+	<%= infoErrorObj %>
+</div>
+<% } %>
+
+
 <div class="row-justify-content-center">
 	<div class="col-8">
 		<form action="/submit-recipe" enctype="multipart/form-data" method="post">
 			<div class="row g-3">
 
 				<div class="col-12">
-					<label for="email" class="form-label">Email</label>
+					<label for="email" class="form-label"><h6>Email:</h6></label>
 					<input type="email" name="email" id="email" class="form-control">
 				</div>
 
 				<div class="col-12">
-					<label for="title" class="form-label">Recipe Title </label>
+					<label for="title" class="form-label"><h6>Recipe Title:</h6> </label>
 					<input type="text" name="name" id="name" class="form-control">
 				</div>
 
 				<div class="col-12"></div>
-					<label for="description" class="form-label">Description </label>
+					<label for="description" class="form-label"><h6>Description:</h6> </label>
 					<textarea name="description" id="description" class="form-control" cols="30" rows="5"></textarea>
 				</div>
 
 				<div class="col-12"></div>
-					<label for="name" class="form-label">Ingredients</label><br>
+					<label for="name" class="form-label"><h6>Ingredients:</h6></label><br>
 					<small>Example:</small>
 					<div class="ingredientList">
 						<div class="ingredeintDiv mb-1">
@@ -40,7 +53,7 @@
         </div>
 
 				<div class="col-12>">
-					<label for="category">Select Category</label>
+					<label for="category"><h6>Select Category:</h6></label>
 					<select class="form-select form-control" name="category" aria-label="category">
 						<option selected>Select Category</option>
 						<option value="Thai">Thai</option>
@@ -54,11 +67,11 @@
 				</div>
 
 				<div class="col-12">
-					<label for="image">Recipe Image</label>
+					<label for="image"><h6>Recipe Image:</h6> </label>
 					<input type="file" class="form-control" name="image" accept="image/*">
 				</div>
 
-				<div class="col-12">
+				<div class="col-10">
 					<button type="submit" class="btn btn-primary">Submit Recipe</button>
 				</div>
 
