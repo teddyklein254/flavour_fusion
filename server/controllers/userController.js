@@ -74,42 +74,51 @@ const createJWT = (payload) => {
     });
 
     return token;
-}
+};
+
 
 exports.loginUser = async (req, res) => {
     try {
-        const { email, password } = req.body;
-
-        if (!email || !password) {
-            return res.status(400).send({ message: 'All fields are required' });
-        }
-
-        const userExists = await User.findOne({ email });
-        if (!userExists) {
-            return res.status(400).send({ message: 'User does not exist' });
-        }
-
-        const validPassword = await bcrypt.compare(password, userExists.password);
-        if (!validPassword) {
-            return res.status(400).send({ message: 'Invalid password' });
-        }
-
-        const token = createJWT({ userId: userExists._id, role: userExists.role });
-
-        res.cookie('jwt', token, {
-            httpOnly: true,
-            expires: new Date(Date.now() + 24 * 60 * 60 * 1000 * 7),
+      const { email, password } = req.body;
+  
+      if (!email || !password) {
+        return res.render('login', { 
+          title: 'Login',
+          error: 'All fields are required'
         });
-
-        return res.status(200).send({ message: 'Login successful' });
-
+      }
+  
+      const userExists = await User.findOne({ email });
+      if (!userExists) {
+        return res.render('login', { 
+          title: 'Login',
+          error: 'User does not exist'
+        });
+      }
+  
+      const validPassword = await bcrypt.compare(password, userExists.password);
+      if (!validPassword) {
+        return res.render('login', { 
+          title: 'Login',
+          error: 'Invalid password'
+        });
+      }
+  
+      const token = createJWT({ userId: userExists._id, role: userExists.role });
+  
+      res.cookie('jwt', token, {
+        httpOnly: true,
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000 * 7),
+      });
+  
+      return res.redirect('/dashboard'); // Redirect to a protected route or dashboard
+  
     } catch (error) {
-        console.error('Login error:', error);
-        res.status(500).send({ message: error.message || "An error occurred" });
+      console.error('Login error:', error);
+      return res.render('login', { 
+        title: 'Login',
+        error: error.message || "An error occurred"
+      });
     }
-}
-
-
-
-
-
+  };
+  

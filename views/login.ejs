@@ -13,13 +13,9 @@
   <% } %>
   
   <div class="card shadow-lg p-4 mx-auto mt-5" style="max-width: 500px;">
-    <h2 class="text-center mb-4">Sign Up</h2>
-    
-    <form method="POST" action="/register">
-      <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username" name="username" required>
-      </div>
+    <h2 class="text-center mb-4">Login</h2>
+  
+    <form method="POST" action="/login">
       <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
         <input type="email" class="form-control" id="email" name="email" required>
@@ -41,7 +37,7 @@
 				"
 				onmouseover="this.style.backgroundColor='#333'"
 				onmouseout="this.style.backgroundColor='#000'"
-      class="btn btn-primary w-100">Sign Up</button>
+      class="btn btn-primary w-100">Login</button>
     </form>
   </div>
   
