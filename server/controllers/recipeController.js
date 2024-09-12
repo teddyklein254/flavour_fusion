@@ -188,6 +188,67 @@ exports.submitRecipeOnPost = async (req, res) => {
   }
 };
 
+/**
+ * GET /recipe/:id/edit
+ * Edit Recipe
+ */
+exports.editRecipe = async (req, res) => {
+    try {
+        let recipeId = req.params.id;
+        const recipe = await Recipe.findById(recipeId);
+        if (!recipe) {
+            return res.status(404).send({ message: 'Recipe not found' });
+        }
+        res.render('edit-recipe', { title: 'Flavour Fusion - Edit Recipe', recipe });
+    } catch (error) {
+        res.status(500).send({ message: error.message || "Error occurred" });
+    }
+};
+
+/**
+ * POST /recipe/:id/edit
+ * Edit Recipe On Post
+ */
+exports.editRecipeOnPost = async (req, res) => {
+    try {
+        let recipeId = req.params.id;
+        let recipe = await Recipe.findById(recipeId);
+        if (!recipe) {
+            return res.status(404).send({ message: 'Recipe not found' });
+        }
+
+        // Update recipe properties
+        recipe.name = req.body.name;
+        recipe.description = req.body.description;
+        // Update other properties as needed
+
+        await recipe.save();
+        res.redirect('/recipe/' + recipeId);
+    } catch (error) {
+        res.status(500).send({ message: error.message || "Error occurred" });
+    }
+};
+
+/**
+ * GET /recipe/:id/delete
+ * Delete Recipe
+ */
+exports.deleteRecipe = async (req, res) => {
+    try {
+        let recipeId = req.params.id;
+        let recipe = await Recipe.findById(recipeId);
+        if (!recipe) {
+            return res.status(404).send({ message: 'Recipe not found' });
+        }
+
+        await Recipe.findByIdAndRemove(recipeId);
+        res.redirect('/');
+    } catch (error) {
+        res.status(500).send({ message: error.message || "Error occurred" });
+    }
+};
+
+
 
 
 // async function insertDummyCategoryData() {

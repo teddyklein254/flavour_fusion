@@ -14,6 +14,10 @@ router.get('/explore-latest', recipeController.exploreLatest);
 router.get('/explore-random', recipeController.exploreRandom);
 router.get('/submit-recipe', recipeController.submitRecipe);
 router.post('/submit-recipe', recipeController.submitRecipeOnPost);
+router.get('/recipe/:id/edit', recipeController.editRecipe);
+router.post('/recipe/:id/edit', recipeController.editRecipeOnPost);
+router.get('/recipe/:id/delete', recipeController.deleteRecipe);
+
 
 console.log(recipeController); // Check what is being imported
 
