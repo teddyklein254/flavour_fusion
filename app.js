@@ -28,6 +28,10 @@ app.set('layout', './layouts/main');
 app.set('view engine', 'ejs');
 
 const routes = require('./server/routes/recipeRoutes.js')
+const userRoutes = require('./server/routes/userRoute.js')
+
 app.use('/', routes);
+app.use('/', userRoutes);
+
 
 app.listen(port, ()=> console.log('Listening to port ${port}'));
