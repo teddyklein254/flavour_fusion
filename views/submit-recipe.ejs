@@ -13,7 +13,7 @@
 
 <% if(infoErrorObj != '') { %>
 <div class="col-8 alert alert-danger" role="alert">
-	<%= infoErrorObj %>
+	<%= infoErrorObj[0].message %>
 </div>
 <% } %>
 
@@ -25,12 +25,12 @@
 
 				<div class="col-12">
 					<label for="email" class="form-label"><h6>Email:</h6></label>
-					<input type="email" name="email" id="email" class="form-control">
+					<input type="email" name="email" id="email" class="form-control" required>
 				</div>
 
 				<div class="col-12">
 					<label for="title" class="form-label"><h6>Recipe Title:</h6> </label>
-					<input type="text" name="name" id="name" class="form-control">
+					<input type="text" name="name" id="name" class="form-control" required>
 				</div>
 
 				<div class="col-12"></div>
@@ -43,7 +43,7 @@
 					<small>Example:</small>
 					<div class="ingredientList">
 						<div class="ingredeintDiv mb-1">
-							<input type="text" name="ingredients" class="form-control">
+							<input type="text" name="ingredients" class="form-control" required>
 						</div>
 					</div>
 				</div>

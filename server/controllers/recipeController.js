@@ -148,14 +148,11 @@ exports.submitRecipeOnPost = async (req, res) => {
   try {
 
     const newRecipe = new Recipe({
-      name: 'Mixed beans and maize(Githeri)',
-      description: 'A delicious mixture of one of the best collaboration in Africa',
-      email: 'Jayden@jasan.mail',
-      ingredients: [
-        '1 cup of yellow beans',
-        '2 cups of maize corns',
-        '3 cups of water'],
-      category: 'Kenyan',
+      name: req.body.name,
+      description: req.body.description,
+      email: req.body.email,
+      ingredients: req.body.ingredients,
+      category: req.body.category,
       image: 'Githeri.jpeg'
     });
 
@@ -172,7 +169,7 @@ exports.submitRecipeOnPost = async (req, res) => {
       req.flash('infoSubmit', 'Recipe successfully submited');
       res.redirect('/submit-recipe');
   } catch (error) {
-    req.flash('infoErrors', 'Recipe successfully submited');
+    req.flash('infoErrors', error);
     res.redirect('/submit-recipe');   
   }
 
