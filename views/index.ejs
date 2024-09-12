@@ -79,7 +79,7 @@
 
 	<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
 
-		<% if (food != '') { %>
+		<% if (food.thai != '') { %>
 			<% food.thai.forEach(function(recipe, index){ %>
 		<a href="/recipe/<%= recipe._id %>" class="col text-center category_link">
 			<div class="category_img category_img--lg shadow">
@@ -90,8 +90,6 @@
 		<% }) %>
 		<% } %>
 	</div>
-
-	
 </section>
 
   <!-- Thai End  -->
@@ -106,7 +104,7 @@
 
 	<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
 
-		<% if (food != '') { %>
+		<% if (food.italian != '') { %>
 			<% food.italian.forEach(function(recipe, index){ %>
 		<a href="/recipe/<%= recipe._id %>" class="col text-center category_link">
 			<div class="category_img category_img--lg shadow">
@@ -117,6 +115,7 @@
 		<% }) %>
 		<% } %>
 	</div>
+	</section>
 
 	<!-- Italian end  -->
 
@@ -130,7 +129,7 @@
 
 	<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
 
-		<% if (food != '') { %>
+		<% if (food.spanish != '') { %>
 			<% food.spanish.forEach(function(recipe, index){ %>
 		<a href="/recipe/<%= recipe._id %>" class="col text-center category_link">
 			<div class="category_img category_img--lg shadow">
@@ -157,7 +156,7 @@
 
 	<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
 
-		<% if (food != '') { %>
+		<% if (food.american != '') { %>
 			<% food.american.forEach(function(recipe, index){ %>
 		<a href="/recipe/<%= recipe._id %>" class="col text-center category_link">
 			<div class="category_img category_img--lg shadow">
@@ -174,7 +173,12 @@
 
 <!-- American end  -->
 
+
+
+
+
 <!-- Kenyan start  -->
+
 <section class="pb-4 pt-4">
 	<div class="d-flex mb-2 align-items-center">
 		<h2 class="text-center">Kenyan Recipes</h2>
@@ -183,7 +187,7 @@
 
 	<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
 
-		<% if (food != '') { %>
+		<% if (food.kenyan != '') { %>
 			<% food.kenyan.forEach(function(recipe, index){ %>
 		<a href="/recipe/<%= recipe._id %>" class="col text-center category_link">
 			<div class="category_img category_img--lg shadow">
@@ -194,9 +198,16 @@
 		<% }) %>
 		<% } %>
 	</div>
-	<!-- Kenyan end  -->
+	</section>
+
+<!-- Kenyan end  -->
+
+
+
 
 <!-- Mexican start  -->
+
+
 
 
 <!-- Mexican end  -->

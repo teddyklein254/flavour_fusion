@@ -8,6 +8,7 @@ const Recipe = require('../models/Recipe'); // Renamed to Recipe
  */
 exports.homepage = async (req, res) => {
     try {
+        console.log('homepage function called');
         const limitNumber = 5;
         const categories = await category.find({}).limit(limitNumber);
         const latest = await Recipe.find({}).sort({ _id: -1 }).limit(limitNumber);
@@ -42,6 +43,28 @@ exports.exploreCategories = async (req, res) => {
     }
 };
 
+
+/**
+ * GET /categories/:id
+ * Categories By Id
+ */
+exports.exploreCategoriesById = async (req, res) => {
+  try {
+    let categoryId = req.params.id;
+    const limitNumber = 20;
+    const categoryById = await Recipe.find({ 'category': categoryId }).limit(limitNumber);
+    res.render('categories', { title: 'Flavour Fusion - Categories', categoryById });
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Error occurred" });
+  }
+};
+
+
+// Recipe Id not working on the category part and needs to be fixed before the application is presented
+
+
+
+
 /**
  * GET /recipe/:id
  * Recipe
@@ -60,6 +83,33 @@ exports.exploreRecipe = async (req, res) => {
 };
 
 
+/**
+ *POST /search
+ * Search
+ */
+exports.searchRecipe = async (req, res) => {
+    try {
+        let searchTerm = req.body.searchTerm; // Corrected to use a semicolon
+        let recipe = await Recipe.find({ $text: { $search: searchTerm, $diacriticSensitive: true } }); // Corrected to use parentheses
+        res.render('search', { title: 'Flavour Fusion - Search', recipe });
+    } catch (error) {
+        res.status(500).send({ message: error.message || "Error occurred" });
+    }
+};
+
+/**
+ * GET /explore-latest
+ * Explore Latest 
+*/
+exports.exploreLatest = async(req, res) => {
+  try {
+    const limitNumber = 20;
+    const recipe = await Recipe.find({}).sort({ _id: -1 }).limit(limitNumber);
+    res.render('explore-latest', { title: 'Cooking Blog - Explore Latest', recipe } );
+  } catch (error) {
+    res.satus(500).send({message: error.message || "Error Occured" });
+  }
+} 
 
 
 
@@ -76,24 +126,32 @@ exports.exploreRecipe = async (req, res) => {
 // 	try {
 // 		await category.insertMany([
 // 			{
-// 				"name": "Thailand Specialities",
+// 				"name": "Thai",
 // 				"image": "Thai.jpg"
 // 			 },
 // 			 {
-// 				"name": "Spanish Specialities",
+// 				"name": "Spanish",
 // 				"image": "Spanish.jpg"
 // 			 },
 // 			 {
-// 				"name": "Italian Specialities",
+// 				"name": "Italian",
 // 				"image": "Italian.jpg"
 // 			 },
 // 			 {
-// 				"name": "Mexican Specialities",
+// 				"name": "Mexican",
 // 				"image": "Mexican.jpg"
 // 			 },
 // 			 {
-// 				"name": "Japanese Specialities",
+// 				"name": "Japanese",
 // 				"image": "Japanese.jpg"
+// 			 },
+//              {
+// 				"name": "Kenyan",
+// 				"image": "kenyan.jpeg"
+// 			 },
+//               {
+// 				"name": "American",
+// 				"image": "burgers.jpg"
 // 			 }
 
 // 		]);
