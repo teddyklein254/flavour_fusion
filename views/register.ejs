@@ -1,47 +1,71 @@
 <% if (typeof error != 'undefined') { %>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <strong>Error!</strong> <%= error %>
+      <strong>Error:</strong> <%= error %>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <% } %>
   
   <% if (typeof success != 'undefined') { %>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <strong>Success!</strong> <%= success %>
+      <strong>Success:</strong> <%= success %>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+    <script>
+      setTimeout(function() {
+        window.location.href = '/login';
+      }, 500); 
+    </script>
   <% } %>
   
   <div class="card shadow-lg p-4 mx-auto mt-5" style="max-width: 500px;">
     <h2 class="text-center mb-4">Sign Up</h2>
-    
-    <form method="POST" action="/register">
+  
+    <form method="POST" action="/register" autocomplete="off" id="registerForm">
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username" name="username" required>
+        <input type="text" class="form-control" id="username" name="username" autocomplete="username" required>
+        <div class="invalid-feedback">Username is required.</div>
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="email" name="email" required>
+        <input type="email" class="form-control" id="email" name="email" autocomplete="email" required>
+        <div class="invalid-feedback">A valid email is required.</div>
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password" required>
+        <input type="password" class="form-control" id="password" name="password" autocomplete="new-password" required>
+        <div class="invalid-feedback">Password is required.</div>
       </div>
       <button type="submit"
-      style="
-				  display: inline-block;
-				  padding: 8px 16px;
-				  background-color: #000;
-				  color: #fff;
-				  text-decoration: none;
-				  border: 1px solid #000;
-				  border-radius: 4px;
-				  transition: background-color 0.3s;
-				"
-				onmouseover="this.style.backgroundColor='#333'"
-				onmouseout="this.style.backgroundColor='#000'"
-      class="btn btn-primary w-100">Sign Up</button>
+        class="btn btn-primary w-100"
+        style="
+          display: inline-block;
+          padding: 8px 16px;
+          background-color: #000;
+          color: #fff;
+          text-decoration: none;
+          border: 1px solid #000;
+          border-radius: 4px;
+          transition: background-color 0.3s;
+        "
+        onmouseover="this.style.backgroundColor='#333'"
+        onmouseout="this.style.backgroundColor='#000'">Sign Up</button>
     </form>
   </div>
+  
+  <script>
+    const form = document.getElementById('registerForm');
+    form.addEventListener('submit', function(event) {
+      const inputs = form.querySelectorAll('input');
+      inputs.forEach(input => {
+        if (!input.checkValidity()) {
+          input.classList.add('is-invalid');
+          event.preventDefault();
+          event.stopPropagation();
+        } else {
+          input.classList.remove('is-invalid');
+        }
+      });
+    });
+  </script>
   
