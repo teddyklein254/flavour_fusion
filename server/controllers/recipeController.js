@@ -2,6 +2,7 @@ require('../models/database');
 const category = require('../models/Category');
 const Recipe = require('../models/Recipe'); // Renamed to Recipe
 
+
 /**
  * GET /
  * homepage
@@ -27,6 +28,7 @@ exports.homepage = async (req, res) => {
         res.status(500).send({ message: error.message || "Error occurred" });
     }
 };
+
 
 /**
  * GET /categories
@@ -83,6 +85,7 @@ exports.exploreRecipe = async (req, res) => {
 };
 
 
+
 /**
  *POST /search
  * Search
@@ -97,6 +100,7 @@ exports.searchRecipe = async (req, res) => {
     }
 };
 
+
 /**
  * GET /explore-latest
  * Explore Latest 
@@ -110,6 +114,7 @@ exports.exploreLatest = async(req, res) => {
     res.satus(500).send({message: error.message || "Error Occured" });
   }
 };
+
 
 /**
  * GET /explore-random
@@ -128,6 +133,7 @@ exports.exploreRandom = async (req, res) => {
   }
 };
 
+
 /**
  * GET /submit-recipe
  * Submit Recipe
@@ -138,6 +144,7 @@ exports.submitRecipe = async (req, res) => {
   const infoSubmitObj = req.flash('infoSubmit');
     res.render('submit-recipe', { title: 'Flavour Fusion - Submit Recipe', infoErrorObj, infoSubmitObj, successMessage});
 };
+
 
 /**
  * POST /submit-recipe
@@ -157,13 +164,10 @@ exports.submitRecipeOnPost = async (req, res) => {
 
       imageUploadFile = req.files.image;
       newImageName = Date.now() + imageUploadFile.name;
-
       uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName;
-
       imageUploadFile.mv(uploadPath, function(err){
         if(err) return res.satus(500).send(err);
       })
-
     } // end of if statement
 
     const newRecipe = new Recipe({
@@ -176,36 +180,13 @@ exports.submitRecipeOnPost = async (req, res) => {
     });
 
     await newRecipe.save();
-
-
-
-
-
-
-
-
-
       req.flash('infoSubmit', 'Recipe successfully submited');
       res.redirect('/submit-recipe');
   } catch (error) {
     req.flash('infoErrors', error);
     res.redirect('/submit-recipe');   
   }
-
-
-
-
-
-
 };
-
-
-
-	
-
-
-
-
 
 
 
