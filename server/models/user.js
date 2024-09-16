@@ -14,7 +14,12 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: 'This field is required'
+    },
+    favorites: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Recipe' 
     }
+    
 });
 
 module.exports = mongoose.model('User', userSchema);
