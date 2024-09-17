@@ -16,5 +16,5 @@ db.once('open', function() {
 require('./Category.js');
 require('./Recipe.js');
 require('./user.js');
-require('./favorites')
+
 

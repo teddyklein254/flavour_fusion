@@ -15,10 +15,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: 'This field is required'
     },
-    favorites: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Recipe' 
-    }
+
+
+ 
+
     
 });
 
