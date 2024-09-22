@@ -220,7 +220,20 @@ exports.editRecipeOnPost = async (req, res) => {
         // Update recipe properties
         recipe.name = req.body.name;
         recipe.description = req.body.description;
-        // Update other properties as needed
+        recipe.email = req.body.email;
+        recipe.ingredients = req.body.ingredients;
+        recipe.category = req.body.category;
+
+        // Handle image upload
+        if (req.files && req.files.image) {
+            let imageUploadFile = req.files.image;
+            let newImageName = Date.now() + imageUploadFile.name;
+            let uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName;
+            imageUploadFile.mv(uploadPath, function(err) {
+                if (err) return res.status(500).send(err);
+            });
+            recipe.image = newImageName;
+        }
 
         await recipe.save();
         res.redirect('/recipe/' + recipeId);

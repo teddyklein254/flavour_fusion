@@ -111,7 +111,7 @@ exports.loginUser = async (req, res) => {
         expires: new Date(Date.now() + 24 * 60 * 60 * 1000 * 7),
       });
   
-      return res.redirect('/dashboard'); // Redirect to a protected route or dashboard
+      return res.redirect('/'); // Redirect to a protected route or dashboard
   
     } catch (error) {
       console.error('Login error:', error);
