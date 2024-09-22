@@ -18,5 +18,3 @@ For contribution you can contirbute by cloning the project after youve checked o
 
 ![Screenshot from 2024-09-13 02-23-05](https://github.com/user-attachments/assets/954ae44a-a937-464f-98aa-a1f87d1c291a)
 
-
-
